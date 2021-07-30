@@ -1,3 +1,4 @@
+
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
@@ -9,12 +10,12 @@ import 'edge_detection_shape/edge_detection_shape.dart';
 
 class ImagePreview extends StatefulWidget {
   ImagePreview({
-    this.imagePath,
-    this.edgeDetectionResult
+    required this.imagePath,
+    required this.edgeDetectionResult
   });
 
   final String imagePath;
-  final EdgeDetectionResult edgeDetectionResult;
+  final EdgeDetectionResult? edgeDetectionResult;
 
   @override
   _ImagePreviewState createState() => _ImagePreviewState();
@@ -58,6 +59,11 @@ class _ImagePreviewState extends State<ImagePreview> {
     if (widget.edgeDetectionResult == null)
       return Container();
 
+    print('wtf_ EdgeDetectionResult=${widget.edgeDetectionResult!.bottomLeft}, '
+        '${widget.edgeDetectionResult!.bottomRight}, '
+        '${widget.edgeDetectionResult!.topLeft}, '
+        '${widget.edgeDetectionResult!.topRight}');
+
     final keyContext = imageWidgetKey.currentContext;
 
     if (keyContext == null) {
@@ -68,11 +74,11 @@ class _ImagePreviewState extends State<ImagePreview> {
 
     return EdgeDetectionShape(
       originalImageSize: Size(
-        imageSnapshot.data.width.toDouble(),
-        imageSnapshot.data.height.toDouble()
+        imageSnapshot.data?.width.toDouble()?? 0.0,
+        imageSnapshot.data?.height.toDouble()?? 0.0,
       ),
       renderedImageSize: Size(box.size.width, box.size.height),
-      edgeDetectionResult: widget.edgeDetectionResult,
+      edgeDetectionResult: widget.edgeDetectionResult!,
     );
   }
 

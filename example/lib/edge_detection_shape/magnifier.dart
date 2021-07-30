@@ -1,3 +1,4 @@
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
@@ -5,8 +6,8 @@ import 'magnifier_painter.dart';
 
 class Magnifier extends StatefulWidget {
   const Magnifier({
-    @required this.child,
-    @required this.position,
+    required this.child,
+    required this.position,
     this.visible = true,
     this.scale = 1.5,
     this.size = const Size(160, 160)
@@ -23,9 +24,9 @@ class Magnifier extends StatefulWidget {
 }
 
 class _MagnifierState extends State<Magnifier> {
-  Size _magnifierSize;
-  double _scale;
-  Matrix4 _matrix;
+  late Size _magnifierSize;
+  late double _scale;
+  late Matrix4 _matrix;
 
   @override
   void initState() {
@@ -64,8 +65,10 @@ class _MagnifierState extends State<Magnifier> {
       double newY =  widget.position.dy - (_magnifierSize.height / 2 / _scale);
 
       if (_bubbleCrossesMagnifier()) {
-        final box = context.findRenderObject() as RenderBox;
-        newX -= ((box.size.width - _magnifierSize.width) / _scale);
+        final box = context.findRenderObject() as RenderBox?;
+        if (box != null) {
+          newX -= ((box.size.width - _magnifierSize.width) / _scale);
+        }
       }
 
       final Matrix4 updatedMatrix = Matrix4.identity()

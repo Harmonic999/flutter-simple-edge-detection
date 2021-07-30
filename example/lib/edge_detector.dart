@@ -1,3 +1,4 @@
+
 import 'dart:async';
 import 'dart:isolate';
 
@@ -45,7 +46,7 @@ class EdgeDetector {
     return await _subscribeToPort<bool>(port);
   }
 
-  void _spawnIsolate<T>(Function function, dynamic input, ReceivePort port) {
+  void _spawnIsolate<T>(void Function(T) function, dynamic input, ReceivePort port) {
     Isolate.spawn<T>(
       function,
       input,
@@ -55,7 +56,7 @@ class EdgeDetector {
   }
 
   Future<T> _subscribeToPort<T>(ReceivePort port) async {
-    StreamSubscription sub;
+    StreamSubscription? sub;
     
     var completer = new Completer<T>();
     
@@ -70,8 +71,8 @@ class EdgeDetector {
 
 class EdgeDetectionInput {
   EdgeDetectionInput({
-    this.inputPath,
-    this.sendPort
+    required this.inputPath,
+    required this.sendPort
   });
 
   String inputPath;
@@ -80,9 +81,9 @@ class EdgeDetectionInput {
 
 class ProcessImageInput {
   ProcessImageInput({
-    this.inputPath,
-    this.edgeDetectionResult,
-    this.sendPort
+    required this.inputPath,
+    required this.edgeDetectionResult,
+    required this.sendPort
   });
 
   String inputPath;

@@ -1,7 +1,8 @@
+
 import 'package:flutter/material.dart';
 
 class AnimatedTouchBubblePart extends StatefulWidget {
-  AnimatedTouchBubblePart({this.dragging, this.size});
+  AnimatedTouchBubblePart({required this.dragging, required this.size});
 
   final bool dragging;
   final double size;
@@ -11,9 +12,9 @@ class AnimatedTouchBubblePart extends StatefulWidget {
 }
 
 class _AnimatedTouchBubblePartState extends State<AnimatedTouchBubblePart> with SingleTickerProviderStateMixin  {
-  AnimationController _controller;
-  Animation<Color> _colorAnimation;
-  Animation<double> _sizeAnimation;
+   late AnimationController _controller;
+   late Animation<Color?> _colorAnimation;
+   late Animation<double> _sizeAnimation;
 
   @override
   void didChangeDependencies() {
@@ -62,14 +63,14 @@ class _AnimatedTouchBubblePartState extends State<AnimatedTouchBubblePart> with 
           )
         ),
         AnimatedBuilder(
-          builder: (BuildContext context, Widget child) {
+          builder: (BuildContext context, Widget? child) {
             return Center(
               child: Container(
                 width: widget.dragging ? 0 : widget.size * _sizeAnimation.value,
                 height: widget.dragging ? 0 : widget.size  * _sizeAnimation.value,
                 decoration: BoxDecoration(
                   border: Border.all(
-                      color: _colorAnimation.value,
+                      color: _colorAnimation.value!,
                       width: widget.size / 20
                   ),
                   borderRadius: widget.dragging ? BorderRadius.zero : BorderRadius.circular(widget.size * _sizeAnimation.value / 2)

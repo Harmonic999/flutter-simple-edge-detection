@@ -1,9 +1,10 @@
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 
 class ImageView extends StatefulWidget {
   ImageView({
-    this.imagePath
+    required this.imagePath
   });
 
   final String imagePath;

@@ -6,14 +6,16 @@ description: Demonstrates how to use the simple_edge_detection plugin.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  camera: ^0.5.8+5
-  path_provider: ^1.6.14
-  image_picker: ^0.6.7+7
+
+  google_ml_kit: '0.7.0'
+  firebase_core:
+  camera: '0.8.1+7'
+  flutter_exif_rotation: '0.4.1'
 
   simple_edge_detection:
     # When depending on this package from a real application you should use:

@@ -1,12 +1,13 @@
+
 import 'package:flutter/material.dart';
 
 import 'animated_touch_bubble_part.dart';
 
 class TouchBubble extends StatefulWidget {
   TouchBubble({
-    @required this.size,
-    @required this.onDrag,
-    @required this.onDragFinished,
+    required this.size,
+    required this.onDrag,
+    required this.onDragFinished,
   });
 
   final double size;
